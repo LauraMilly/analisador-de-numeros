@@ -36,14 +36,55 @@ function add() {
 
         // Adiciona o novo item à lista de opções (presumivelmente um <select> ou <datalist>).
         lista.appendChild(item);
+        res.innerHTML=''
     } else {
         // Exibe um alerta se o valor for inválido ou já estiver na lista.
         window.alert('Valor inválido ou já encontrado na lista');
     }
-
     // Limpa o campo de entrada e coloca o foco de volta nele.
     num.value = '';
     num.focus();
 }
 
+function finalizar() {
+    // Verifica se a lista de valores está vazia.
+    if (valores.length == 0) {
+        window.alert('Adicione valores antes de finalizar');
+    } else {
+        // Inicializa variáveis para armazenar o total de valores, maior, menor, soma e média.
+        let tot = valores.length;
+        let maior = valores[0]; // Assume que o primeiro valor é o maior inicialmente.
+        let menor = valores[0]; // Assume que o primeiro valor é o menor inicialmente.
+        let soma = 0; // Inicializa a soma dos valores.
+        let media = 0; // Inicializa a média dos valores.
+
+        // Itera sobre a lista de valores para calcular soma, maior, e menor valor.
+        for (let pos in valores) {
+            soma += valores[pos]; // Adiciona o valor atual à soma total.
+            if (valores[pos] > maior) {
+                maior = valores[pos]; // Atualiza o maior valor se o valor atual for maior.
+            }
+            if (valores[pos] < menor) {
+                menor = valores[pos]; // Atualiza o menor valor se o valor atual for menor.
+            }
+        }
+
+        // Calcula a média dos valores.
+        media = soma / tot;
+
+        // Limpa o conteúdo atual do elemento `res`.
+        res.innerHTML = '';
+
+        // Adiciona o total de números à lista ao conteúdo do elemento `res`.
+        res.innerHTML += `<p>Você adicionou ${tot} números à lista.</p>`;
+        // Adiciona o maior valor informado ao conteúdo do elemento `res`.
+        res.innerHTML += `<p>O maior valor informado foi ${maior}.</p>`;
+        // Adiciona o menor valor informado ao conteúdo do elemento `res`.
+        res.innerHTML += `<p>O menor valor informado foi ${menor}.</p>`;
+        // Adiciona a soma de todos os valores ao conteúdo do elemento `res`.
+        res.innerHTML += `<p>Somando todos os valores, temos ${soma}.</p>`;
+        // Adiciona a média dos valores ao conteúdo do elemento `res`.
+        res.innerHTML += `<p>A média dos valores digitados é ${media.toFixed(2)}.</p>`; // Formata a média para duas casas decimais.
+    }
+}
         
