@@ -23,7 +23,27 @@ function inLista(n, l) {
 
 // Função chamada quando o usuário clica para adicionar um valor.
 function add() {
-    // Verifica se o valor é um número válido e não está na lista.
-    if (isNumero(num.value) && !inLista(num.value, valores)) {}
+    // Verifica se o valor inserido é um número válido e se não está já na lista de valores.
+    if (isNumero(num.value) && !inLista(num.value, valores)) {
+        // Adiciona o número à lista de valores.
+        valores.push(Number(num.value)); 
+
+        // Cria um novo elemento <option> para exibir a mensagem na lista.
+        let item = document.createElement('option');
+
+        // Define o texto do novo item da lista com o valor adicionado.
+        item.text = `Valor ${num.value} adicionado`;
+
+        // Adiciona o novo item à lista de opções (presumivelmente um <select> ou <datalist>).
+        lista.appendChild(item);
+    } else {
+        // Exibe um alerta se o valor for inválido ou já estiver na lista.
+        window.alert('Valor inválido ou já encontrado na lista');
+    }
+
+    // Limpa o campo de entrada e coloca o foco de volta nele.
+    num.value = '';
+    num.focus();
 }
+
         
